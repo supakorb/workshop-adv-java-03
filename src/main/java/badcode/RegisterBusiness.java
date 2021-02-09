@@ -5,7 +5,7 @@ public class RegisterBusiness {
 	public Integer register(SpeakerRepository repository, Speaker speaker) {
 		validateRegisterData(speaker);
 		speaker.setRegistrationFee(getFee(speaker.getExp()));
-		return saveSpeaker(repository, speaker);
+		return repository.saveSpeaker(speaker);
 	}
 	
 	private void validateRegisterData(Speaker speaker) {
@@ -13,16 +13,6 @@ public class RegisterBusiness {
 		speaker.checkEmptyFirstName();
 		speaker.checkEmptyLastName();
 		speaker.checkValidEmail(domains);
-	}
-	
-	private Integer saveSpeaker(SpeakerRepository repository, Speaker speaker) {
-		Integer speakerId;
-		try {
-			speakerId = repository.saveSpeaker(speaker);
-		} catch (Exception exception) {
-			throw new SaveSpeakerException("Can't save a speaker.");
-		}
-		return speakerId;
 	}
 	
 	public int getFee(int exp) {
