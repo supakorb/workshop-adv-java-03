@@ -4,6 +4,7 @@ public class RegisterBusiness {
 
 	public Integer register(SpeakerRepository repository, Speaker speaker) {
 		validateRegisterData(speaker);
+		speaker.setRegistrationFee(getFee(speaker.getExp()));
 		return saveSpeaker(repository, speaker);
 	}
 	
@@ -12,7 +13,6 @@ public class RegisterBusiness {
 		speaker.checkEmptyFirstName();
 		speaker.checkEmptyLastName();
 		speaker.checkValidEmail(domains);
-		speaker.setRegistrationFee(getFee(speaker.getExp()));
 	}
 	
 	private Integer saveSpeaker(SpeakerRepository repository, Speaker speaker) {
