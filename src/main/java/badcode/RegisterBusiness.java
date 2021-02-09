@@ -3,14 +3,20 @@ package badcode;
 public class RegisterBusiness {
 
 	public Integer register(SpeakerRepository repository, Speaker speaker) {
-		Integer speakerId;
+		validateRegisterData(speaker);
+		return saveSpeaker(repository, speaker);
+	}
+	
+	private void validateRegisterData(Speaker speaker) {
 		String[] domains = { "gmail.com", "live.com" };
-		
 		speaker.checkEmptyFirstName();
 		speaker.checkEmptyLastName();
 		speaker.checkValidEmail(domains);
 		speaker.setRegistrationFee(getFee(speaker.getExp()));
-		
+	}
+	
+	private Integer saveSpeaker(SpeakerRepository repository, Speaker speaker) {
+		Integer speakerId;
 		try {
 			speakerId = repository.saveSpeaker(speaker);
 		} catch (Exception exception) {
