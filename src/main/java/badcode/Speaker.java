@@ -35,7 +35,7 @@ public class Speaker {
 	public void checkValidEmail(String[] domains) {
 		checkEmptyEmail();
 		if (email.split("@").length != 2) {
-			throw new SpeakerDoesntMeetRequirementsException("Speaker doesn't meet our standard rules.");
+			throw new DomainEmailInvalidException();
 		}
 		String emailDomain = email.split("@")[1];
 		if (Arrays.stream(domains).filter(it -> it.equals(emailDomain)).count() == 0) {

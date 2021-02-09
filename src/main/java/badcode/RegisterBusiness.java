@@ -9,10 +9,8 @@ public class RegisterBusiness {
 		speaker.checkEmptyFirstName();
 		speaker.checkEmptyLastName();
 		speaker.checkValidEmail(domains);
+		speaker.setRegistrationFee(getFee(speaker.getExp()));
 		
-		int exp = speaker.getExp();
-		// TODO :: create test case to cover this condition
-		speaker.setRegistrationFee(getFee(exp));
 		try {
 			speakerId = repository.saveSpeaker(speaker);
 		} catch (Exception exception) {
@@ -21,7 +19,7 @@ public class RegisterBusiness {
 		return speakerId;
 	}
 	
-	private int getFee(int exp) {
+	public int getFee(int exp) {
 		int fee = 0;
 		if (exp <= 1) {
 			fee = 500;
